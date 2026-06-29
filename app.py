@@ -230,6 +230,28 @@ def run_app():
         else:
             card = st.session_state.current_card
             
+            # --- 新增：定義四種星級對應的背景圖片網址 ---
+            bg_images = {
+                "破冰": "https://images.unsplash.com/photo-1499810631641-541e76d678a2?q=80&w=2070&auto=format&fit=crop", # 晨曦海邊
+                "一星": "https://images.unsplash.com/photo-1472806426350-603610d85659?q=80&w=2070&auto=format&fit=crop", # 溫暖夕陽
+                "二星": "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070&auto=format&fit=crop", # 寧靜星空
+                "三星": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2048&auto=format&fit=crop"  # 深邃宇宙星雲
+            }
+            
+            # 根據抽到的卡牌星級，抓取對應的圖片；如果找不到預設用星空
+            current_bg = bg_images.get(card['star_level'], "https://images.unsplash.com/photo-1519681393784-d120267933ba")
+            
+            # --- 新增：動態注入 CSS 來覆蓋全螢幕背景 ---
+            st.markdown(f"""
+                <style>
+                .stApp {{
+                    background-image: url("{current_bg}") !important;
+                    transition: background-image 0.8s ease-in-out; /* 加入漸變動畫，讓切換背景時很滑順 */
+                }}
+                </style>
+            """, unsafe_allow_html=True)
+            
+            # --- 原本渲染卡牌大字體的程式碼 ---
             st.markdown(f"""
                 <div class="card-box">
                     <div class="card-star">✦ {card['star_level']} ✦</div>
@@ -237,27 +259,7 @@ def run_app():
                 </div>
             """, unsafe_allow_html=True)
             
-            c_guide1, c_guide2 = st.columns(2)
-            with c_guide1:
-                st.markdown("""
-                    <div class="guide-box">
-                        <div class="guide-title">↩️ 回答輔助彈性</div>
-                        <div class="guide-content">
-                            • <b>換一張</b>：若太沉重可享一次PASS機會。<br>
-                            • <b>請人代答</b>：指名現場一位朋友先幫忙打樣。
-                        </div>
-                    </div>
-                """, unsafe_allow_html=True)
-            with c_guide2:
-                st.markdown("""
-                    <div class="guide-box">
-                        <div class="guide-title">💬 聆聽者互動建議</div>
-                        <div class="guide-content">
-                            • <b>溫暖讚美</b>：感謝對方的真誠與脆弱。<br>
-                            • <b>好奇追問</b>：針對故事細節延伸靈魂對話。
-                        </div>
-                    </div>
-                """, unsafe_allow_html=True)
+       
     else:
         st.info("👆 請點擊上方「抽一張卡」按鈕開始遊戲！引導詞與規則已為您放在左側邊欄。")
 
