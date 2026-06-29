@@ -4,7 +4,7 @@ import os
 
 # 設定 Streamlit 頁面優化（適用於手機與網頁端）
 st.set_page_config(
-    page_title="深刻地認識一個人 - 互動抽卡遊戲",
+    page_title="深刻地認識一個人 - 互動抽卡遊戲 from Clark Chen",
     page_icon="🃏",
     layout="centered",
     initial_sidebar_state="expanded"
@@ -64,7 +64,7 @@ st.markdown("""
 # ==========================================
 # 1. INGEST (資料接入層)
 # ==========================================
-@st.cache_data # 使用快取，避免每次抽卡都重新讀取文字檔，提升效能
+
 def load_raw_questions():
     """
     從 questions.txt 讀取題庫，並根據標題自動賦予星級分類。
