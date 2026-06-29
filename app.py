@@ -13,34 +13,44 @@ st.set_page_config(
 # 自訂 CSS 提升介面美觀度與手機閱讀體驗 (質感升級版)
 st.markdown("""
     <style>
-    /* 引入 Google 字體：思源宋體 (適合展示深刻的文字) */
     @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap');
+
+    /* --- 這裡就是設定全螢幕背景圖的地方 --- */
+    .stApp {
+        /* 如果你想換圖片，只要把括號裡面的網址換掉即可 */
+        background-image: url("https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070&auto=format&fit=crop");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
 
     .main .block-container {
         padding-top: 2rem;
         padding-bottom: 2rem;
     }
     
-    /* 卡牌主體設計：加入漸層、圓角與懸浮動畫 */
+    /* --- 卡牌改成「毛玻璃」半透明特效，透出背後星空 --- */
     .card-box {
-        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        background: rgba(255, 255, 255, 0.85); /* 0.85 是透明度 */
+        backdrop-filter: blur(12px); /* 毛玻璃模糊效果 */
+        -webkit-backdrop-filter: blur(12px);
         padding: 40px 30px;
         border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         border-top: 6px solid #4F46E5;
+        border-left: 1px solid rgba(255,255,255,0.5);
+        border-right: 1px solid rgba(255,255,255,0.5);
         margin-top: 20px;
         margin-bottom: 30px;
         text-align: center;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     
-    /* 滑鼠游標移過去時，卡牌會微微浮起的動畫 (手機版則不影響) */
     .card-box:hover {
         transform: translateY(-5px);
-        box-shadow: 0 15px 40px rgba(79, 70, 229, 0.15);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
     }
     
-    /* 卡牌題目字體：使用優雅的宋體 */
     .card-title {
         font-family: 'Noto Serif TC', serif;
         color: #1E1B4B;
@@ -52,37 +62,38 @@ st.markdown("""
         letter-spacing: 1px;
     }
     
-    /* 星級標籤：變成類似膠囊形狀的 Tag */
     .card-star {
         display: inline-block;
-        background-color: #EEF2FF;
+        background-color: rgba(79, 70, 229, 0.1);
         color: #4F46E5;
         padding: 6px 16px;
         border-radius: 20px;
         font-size: 13px;
-        font-weight: 700;
+        font-weight: 800;
         letter-spacing: 2px;
         margin-bottom: 10px;
     }
     
-    /* 輔助說明的框框：改成更柔和的磨砂玻璃感 */
+    /* 讓側邊欄跟文字在深色背景下也能看清楚 */
     .guide-box {
-        background-color: rgba(248, 250, 252, 0.7);
+        background-color: rgba(255, 255, 255, 0.9);
         padding: 18px;
         border-radius: 12px;
-        border: 1px solid #E2E8F0;
+        border: 1px solid rgba(255,255,255,0.5);
         margin-top: 10px;
     }
-    .guide-title {
-        font-weight: 800;
-        color: #334155;
-        font-size: 14px;
-        margin-bottom: 8px;
+    .guide-title { font-weight: 800; color: #334155; font-size: 14px; margin-bottom: 8px; }
+    .guide-content { color: #475569; font-size: 13px; line-height: 1.5; }
+    
+    /* 把主畫面的標題字變成白色，才不會被夜空吃掉 */
+    h1, .stCaption {
+        color: white !important;
+        text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
     }
-    .guide-content {
-        color: #64748B;
-        font-size: 13px;
-        line-height: 1.5;
+    /* 更改進度條與數據文字為白色 */
+    [data-testid="stMetricValue"], [data-testid="stMetricLabel"] {
+        color: white !important;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
     }
     </style>
 """, unsafe_allow_html=True)
