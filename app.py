@@ -10,52 +10,79 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# 自訂 CSS 提升介面美觀度與手機閱讀體驗
+# 自訂 CSS 提升介面美觀度與手機閱讀體驗 (質感升級版)
 st.markdown("""
     <style>
+    /* 引入 Google 字體：思源宋體 (適合展示深刻的文字) */
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap');
+
     .main .block-container {
         padding-top: 2rem;
         padding-bottom: 2rem;
     }
+    
+    /* 卡牌主體設計：加入漸層、圓角與懸浮動畫 */
     .card-box {
-        background-color: #ffffff;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        border-left: 6px solid #4F46E5;
-        margin-bottom: 25px;
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        padding: 40px 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        border-top: 6px solid #4F46E5;
+        margin-top: 20px;
+        margin-bottom: 30px;
         text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+    
+    /* 滑鼠游標移過去時，卡牌會微微浮起的動畫 (手機版則不影響) */
+    .card-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(79, 70, 229, 0.15);
+    }
+    
+    /* 卡牌題目字體：使用優雅的宋體 */
     .card-title {
+        font-family: 'Noto Serif TC', serif;
         color: #1E1B4B;
-        font-size: 24px;
+        font-size: 26px;
         font-weight: 700;
-        line-height: 1.5;
-        margin-bottom: 10px;
-    }
-    .card-star {
-        color: #4F46E5;
-        font-size: 14px;
-        font-weight: 600;
-        text-transform: uppercase;
+        line-height: 1.6;
+        margin-top: 15px;
+        margin-bottom: 15px;
         letter-spacing: 1px;
     }
+    
+    /* 星級標籤：變成類似膠囊形狀的 Tag */
+    .card-star {
+        display: inline-block;
+        background-color: #EEF2FF;
+        color: #4F46E5;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+    }
+    
+    /* 輔助說明的框框：改成更柔和的磨砂玻璃感 */
     .guide-box {
-        background-color: #F8FAFC;
-        padding: 15px 20px;
-        border-radius: 10px;
+        background-color: rgba(248, 250, 252, 0.7);
+        padding: 18px;
+        border-radius: 12px;
         border: 1px solid #E2E8F0;
-        margin-top: 15px;
+        margin-top: 10px;
     }
     .guide-title {
-        font-weight: bold;
+        font-weight: 800;
         color: #334155;
-        font-size: 15px;
-        margin-bottom: 5px;
+        font-size: 14px;
+        margin-bottom: 8px;
     }
     .guide-content {
         color: #64748B;
-        font-size: 14px;
+        font-size: 13px;
+        line-height: 1.5;
     }
     </style>
 """, unsafe_allow_html=True)
